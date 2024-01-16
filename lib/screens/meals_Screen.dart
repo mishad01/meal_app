@@ -4,14 +4,17 @@ import 'package:meal_app/data/mealModel.dart';
 class MealScreen extends StatelessWidget {
   const MealScreen({
     super.key,
+    required this.title,
     required this.meals,
   });
 
+  final String title;
   final List<Meal> meals;
 
   @override
   Widget build(BuildContext context) {
     Widget content = ListView.builder(
+        itemCount: meals.length,
         itemBuilder: (context, index) => Text(meals[index].title));
 
     if (meals.isEmpty) {
@@ -37,6 +40,9 @@ class MealScreen extends StatelessWidget {
           ],
         ),
       );
+    }
+    if (title == null) {
+      return content;
     }
     return Scaffold(
       body: content,
