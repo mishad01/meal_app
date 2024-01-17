@@ -15,7 +15,7 @@ class CategoriesGridItem extends StatelessWidget {
       onTap: onSelectCategory,
       splashColor: Theme.of(context).primaryColor,
       child: Container(
-        padding: EdgeInsets.all(22),
+        padding: EdgeInsets.all(20),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           gradient: LinearGradient(

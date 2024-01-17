@@ -6,19 +6,20 @@ import 'package:meal_app/widgets/meals_item.dart';
 class MealScreen extends StatelessWidget {
   const MealScreen({
     super.key,
-    required this.title,
+    this.title,
     required this.meals,
   });
 
-  final String title;
+  final String? title;
   final List<Meal> meals;
 
   void selectMeal(BuildContext context, Meal meal) {
     Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => MealsDetailsScteen(meal: meal),
-        ));
+      context,
+      MaterialPageRoute(
+        builder: (context) => MealsDetailsScteen(meal: meal),
+      ),
+    );
   }
 
   @override
@@ -68,6 +69,9 @@ class MealScreen extends StatelessWidget {
       return content;
     }
     return Scaffold(
+      appBar: AppBar(
+        title: Text(title!),
+      ),
       body: content,
     );
   }
