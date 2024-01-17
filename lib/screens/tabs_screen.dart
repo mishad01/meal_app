@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/screens/catagories_screen.dart';
 import 'package:meal_app/screens/meals_Screen.dart';
+import 'package:meal_app/widgets/main_drawer.dart';
 
 class TabScreen extends StatefulWidget {
   @override
@@ -30,6 +31,7 @@ class _TabScreen extends State<TabScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
+      drawer: MainDrawer(),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedpageIndex,
@@ -37,7 +39,7 @@ class _TabScreen extends State<TabScreen> {
         items: const [
           BottomNavigationBarItem(
               icon: Icon(Icons.set_meal), label: "Categories"),
-          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favourite"),
+          BottomNavigationBarItem(icon: Icon(Icons.star), label: "Favourite")
         ],
       ),
     );
