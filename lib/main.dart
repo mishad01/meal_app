@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummyData.dart';
 import 'package:meal_app/screens/catagories_screen.dart';
 import 'package:meal_app/screens/meals_Screen.dart';
+import 'package:meal_app/screens/tabs_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: theme,
-      home: CategoriesScreen(),
+      home: TabScreen(),
     );
   }
 }
