@@ -19,6 +19,10 @@ class _TabScreen extends State<TabScreen> {
     });
   }
 
+  void setDrawerScreen(String indentifier) {
+    if (indentifier == 'filters') {}
+  }
+
   @override
   Widget build(BuildContext context) {
     Widget activePage = CategoriesScreen();
@@ -31,7 +35,7 @@ class _TabScreen extends State<TabScreen> {
       appBar: AppBar(
         title: Text(activePageTitle),
       ),
-      drawer: MainDrawer(),
+      drawer: MainDrawer(onSelectFilterScreen: setDrawerScreen),
       body: activePage,
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: selectedpageIndex,
