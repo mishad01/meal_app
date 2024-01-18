@@ -48,7 +48,7 @@ class MainDrawer extends StatelessWidget {
               color: Theme.of(context).colorScheme.onBackground,
             ),
             title: Text(
-              'eals',
+              'Meals',
               style: TextStyle(
                 color: Theme.of(context).colorScheme.onBackground,
                 fontSize: 24,

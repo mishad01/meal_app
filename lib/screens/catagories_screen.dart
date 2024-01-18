@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:meal_app/data/dummyData.dart';
+import 'package:meal_app/data/mealModel.dart';
 import 'package:meal_app/model/categoriesModel.dart';
 import 'package:meal_app/screens/meals_Screen.dart';
 import 'package:meal_app/widgets/categories_grid_item.dart';
 
 class CategoriesScreen extends StatelessWidget {
-  const CategoriesScreen({super.key});
+  const CategoriesScreen({super.key, required this.availableMeal});
+
+  final List<Meal> availableMeal;
 
   void selectCategory(BuildContext context, Category category) {
-    final CategoryFilterdMeals = dummyMeals
+    final CategoryFilterdMeals = availableMeal
         .where((meal) => meal.categories.contains(category.id))
         .toList();
     Navigator.push(

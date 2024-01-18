@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/data/dummyData.dart';
 import 'package:meal_app/screens/catagories_screen.dart';
 import 'package:meal_app/screens/meals_Screen.dart';
@@ -13,7 +14,7 @@ final theme = ThemeData(
 );
 
 void main() {
-  runApp(MyApp());
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
