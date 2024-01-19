@@ -25,13 +25,15 @@ import 'package:meal_app/data/mealModel.dart';
 class FavoriteMealNotifier extends StateNotifier<List<Meal>> {
   FavoriteMealNotifier() : super([]);
 
-  void toggleMealFavouriteStatus(Meal meal) {
+  bool toggleMealFavouriteStatus(Meal meal) {
     final isFavourite = state.contains(meal);
     if (isFavourite) {
       //"favMeal.id != meal.id" with this condition we are keeping an item to the list if the item is not already present in the list
       state = state.where((favMeal) => favMeal.id != meal.id).toList();
+      return false;
     } else {
       state = [...state, meal];
+      return true;
     }
   }
 }

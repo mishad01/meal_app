@@ -17,9 +17,16 @@ class MealsDetailsScteen extends ConsumerWidget {
         actions: [
           IconButton(
             onPressed: () {
-              ref
+              final wasAdded = ref
                   .read(FavouriteMealProvider.notifier)
                   .toggleMealFavouriteStatus(meal);
+              ScaffoldMessenger.of(context).clearSnackBars();
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                    content: Text(wasAdded
+                        ? 'Added to favourtie'
+                        : 'Removed from favourite')),
+              );
             },
             icon: const Icon(Icons.star),
           ),
