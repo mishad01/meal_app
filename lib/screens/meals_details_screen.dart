@@ -1,20 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/data/mealModel.dart';
+import 'package:meal_app/provider/favourite_provider.dart';
 
-class MealsDetailsScteen extends StatelessWidget {
+class MealsDetailsScteen extends ConsumerWidget {
   MealsDetailsScteen({
     super.key,
     required this.meal,
   });
   final Meal meal;
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       appBar: AppBar(
         title: Text(meal.title),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              ref
+                  .read(FavouriteMealProvider.notifier)
+                  .toggleMealFavouriteStatus(meal);
+            },
             icon: const Icon(Icons.star),
           ),
         ],

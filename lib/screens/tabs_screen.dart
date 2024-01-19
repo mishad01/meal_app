@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/data/dummyData.dart';
+import 'package:meal_app/provider/favourite_provider.dart';
 import 'package:meal_app/provider/meals_provider.dart';
 import 'package:meal_app/screens/catagories_screen.dart';
 import 'package:meal_app/screens/filters_screen.dart';
@@ -80,8 +81,11 @@ class _TabScreen extends ConsumerState<TabScreen> {
     String activePageTitle = "Categories";
 
     if (selectedpageIndex == 1) {
-      activePage = MealScreen(title: "Favourite", meals: []);
-      activePageTitle = "Favourites";
+      final FavouriteMeals = ref.watch(FavouriteMealProvider);
+      activePage = MealScreen(
+        meals: FavouriteMeals,
+      );
+      activePageTitle = 'Your Favourite';
     }
 
     return Scaffold(
