@@ -24,6 +24,11 @@ class FiltersNotifier extends StateNotifier<Map<Filter, bool>> {
           isActive, //now this will then over ride the previous fliter value to new value as an example false to true
     };
   }
+
+  void setFilterss(Map<Filter, bool> chosenFilters) {
+    state =
+        chosenFilters; //state is a variable or field that holds the current state of something in the program.
+  }
 }
 
 final FiltersProvider =

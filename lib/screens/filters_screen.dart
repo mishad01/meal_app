@@ -1,20 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:meal_app/provider/filters_provider.dart';
 
-enum Filter {
-  glutenFree,
-  lactosFree,
-  vegetarian,
-  vegan,
-}
+// enum Filter {
+//   glutenFree,
+//   lactosFree,
+//   vegetarian,
+//   vegan,
+// }
 
 class FiltersScreen extends ConsumerStatefulWidget {
   FiltersScreen({
     super.key,
-    required this.currentFilters,
+    //required this.currentFilters,
   });
-  final Map<Filter, bool> currentFilters;
+  //final Map<Filter, bool> currentFilters;
   @override
   ConsumerState<FiltersScreen> createState() {
     return _FiltersScreen();
@@ -29,12 +30,12 @@ class _FiltersScreen extends ConsumerState<FiltersScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
+    final currentFilters = ref.read(FiltersProvider);
     super.initState();
-    __glutenFreeFilterSet = widget.currentFilters[Filter.glutenFree]!;
-    lactosFreeFilterSet = widget.currentFilters[Filter.lactosFree]!;
-    veganFilterSet = widget.currentFilters[Filter.vegan]!;
-    veganFilterSet = widget.currentFilters[Filter.vegetarian]!;
+    __glutenFreeFilterSet = currentFilters[Filter.glutenFree]!;
+    lactosFreeFilterSet = currentFilters[Filter.lactosFree]!;
+    veganFilterSet = currentFilters[Filter.vegan]!;
+    veganFilterSet = currentFilters[Filter.vegetarian]!;
   }
 
   @override
@@ -45,13 +46,14 @@ class _FiltersScreen extends ConsumerState<FiltersScreen> {
       ),
       body: WillPopScope(
         onWillPop: () async {
-          Navigator.of(context).pop({
+          ref.read(FiltersProvider.notifier).setFilterss({
             Filter.glutenFree: __glutenFreeFilterSet,
             Filter.lactosFree: lactosFreeFilterSet,
             Filter.vegetarian: vegetarianFreeFilterSet,
             Filter.vegan: veganFilterSet,
           });
-          return false;
+          //Navigator.of(context).pop();
+          return true;
         },
         child: Column(
           children: [

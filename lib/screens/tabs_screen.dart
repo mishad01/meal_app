@@ -2,18 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:meal_app/data/dummyData.dart';
 import 'package:meal_app/provider/favourite_provider.dart';
+import 'package:meal_app/provider/filters_provider.dart';
 import 'package:meal_app/provider/meals_provider.dart';
 import 'package:meal_app/screens/catagories_screen.dart';
 import 'package:meal_app/screens/filters_screen.dart';
 import 'package:meal_app/screens/meals_Screen.dart';
 import 'package:meal_app/widgets/main_drawer.dart';
 
-const KintialFilters = {
-  Filter.glutenFree: false,
-  Filter.lactosFree: false,
-  Filter.vegan: false,
-  Filter.vegetarian: false,
-};
+// const KintialFilters = {
+//   Filter.glutenFree: false,
+//   Filter.lactosFree: false,
+//   Filter.vegan: false,
+//   Filter.vegetarian: false,
+// };
 
 class TabScreen extends ConsumerStatefulWidget {
   @override
@@ -24,12 +25,12 @@ class TabScreen extends ConsumerStatefulWidget {
 
 class _TabScreen extends ConsumerState<TabScreen> {
   int selectedpageIndex = 0;
-  Map<Filter, bool> selectedFilters = {
-    Filter.glutenFree: false,
-    Filter.lactosFree: false,
-    Filter.vegan: false,
-    Filter.vegetarian: false,
-  };
+  // Map<Filter, bool> selectedFilters = {
+  //   Filter.glutenFree: false,
+  //   Filter.lactosFree: false,
+  //   Filter.vegan: false,
+  //   Filter.vegetarian: false,
+  // };
 
   void selectPage(int ind) {
     setState(() {
@@ -41,12 +42,9 @@ class _TabScreen extends ConsumerState<TabScreen> {
     if (indentifier == 'filters') {
       final result = await Navigator.of(context).push<Map<Filter, bool>>(
         MaterialPageRoute(
-          builder: (context) => FiltersScreen(currentFilters: selectedFilters),
+          builder: (context) => FiltersScreen(),
         ),
       );
-      setState(() {
-        selectedFilters = result ?? KintialFilters;
-      });
     } else {
       Navigator.pop(context);
     }
@@ -55,20 +53,21 @@ class _TabScreen extends ConsumerState<TabScreen> {
   @override
   Widget build(BuildContext context) {
     final meals = ref.watch(mealsProvider);
+    final activeFilters = ref.watch(FiltersProvider);
 
     final availablePage = meals.where(
       // Here the meal will be kept if its true, otherwise it will be removed
       (meal) {
-        if (selectedFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
+        if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
           return false;
         }
-        if (selectedFilters[Filter.lactosFree]! && !meal.isLactoseFree) {
+        if (activeFilters[Filter.lactosFree]! && !meal.isLactoseFree) {
           return false;
         }
-        if (selectedFilters[Filter.vegetarian]! && !meal.isVegetarian) {
+        if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
           return false;
         }
-        if (selectedFilters[Filter.vegan]! && !meal.isVegan) {
+        if (activeFilters[Filter.vegan]! && !meal.isVegan) {
           return false;
         }
         return true;
