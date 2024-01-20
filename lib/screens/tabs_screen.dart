@@ -55,24 +55,7 @@ class _TabScreen extends ConsumerState<TabScreen> {
     final meals = ref.watch(mealsProvider);
     final activeFilters = ref.watch(FiltersProvider);
 
-    final availablePage = meals.where(
-      // Here the meal will be kept if its true, otherwise it will be removed
-      (meal) {
-        if (activeFilters[Filter.glutenFree]! && !meal.isGlutenFree) {
-          return false;
-        }
-        if (activeFilters[Filter.lactosFree]! && !meal.isLactoseFree) {
-          return false;
-        }
-        if (activeFilters[Filter.vegetarian]! && !meal.isVegetarian) {
-          return false;
-        }
-        if (activeFilters[Filter.vegan]! && !meal.isVegan) {
-          return false;
-        }
-        return true;
-      },
-    ).toList();
+    final availablePage = ref.watch(FilteredMealsProvider);
 
     Widget activePage = CategoriesScreen(
       availableMeal: availablePage,
