@@ -18,8 +18,8 @@ class _CategoriesScreenState extends State<CategoriesScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   @override
-  void setState(VoidCallback fn) {
-    super.setState(fn);
+  void initState() {
+    super.initState();
 
     _animationController = AnimationController(
       vsync: this,
@@ -27,6 +27,7 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       lowerBound: 0,
       upperBound: 1,
     );
+    _animationController.forward();
   }
 
   @override
@@ -50,8 +51,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: GridView(
+    return AnimatedBuilder(
+      animation: _animationController,
+      child: GridView(
         padding: EdgeInsets.all(20),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -67,6 +69,12 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                 },
                 category: category),
         ],
+      ),
+      builder: (context, child) => Padding(
+        padding: EdgeInsets.only(
+          top: 100 - _animationController.value * 100,
+        ),
+        child: child,
       ),
     );
   }
