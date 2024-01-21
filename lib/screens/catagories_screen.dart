@@ -70,9 +70,15 @@ class _CategoriesScreenState extends State<CategoriesScreen>
                 category: category),
         ],
       ),
-      builder: (context, child) => Padding(
-        padding: EdgeInsets.only(
-          top: 100 - _animationController.value * 100,
+      // builder: (context, child) => Padding(
+      //   padding: EdgeInsets.only(
+      //     top: 100 - _animationController.value * 100,
+      //   ),
+      //   child: child,
+      // ),
+      builder: (context, child) => SlideTransition(
+        position: _animationController.drive(
+          Tween(),
         ),
         child: child,
       ),
