@@ -78,7 +78,9 @@ class _CategoriesScreenState extends State<CategoriesScreen>
       // ),
       builder: (context, child) => SlideTransition(
         position: _animationController.drive(
-          Tween(),
+          Tween(
+            begin: const Offset(0, 0.3),
+          ),
         ),
         child: child,
       ),
