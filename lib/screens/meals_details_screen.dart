@@ -30,7 +30,10 @@ class MealsDetailsScteen extends ConsumerWidget {
                         : 'Removed from favourite')),
               );
             },
-            icon: Icon(isFavourite ? Icons.star : Icons.star_border),
+            icon: AnimatedSwitcher(
+              duration: Duration(milliseconds: 300),
+              child: Icon(isFavourite ? Icons.star : Icons.star_border),
+            ),
           ),
         ],
       ),
